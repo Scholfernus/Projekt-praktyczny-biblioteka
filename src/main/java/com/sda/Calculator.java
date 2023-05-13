@@ -6,7 +6,6 @@ public class Calculator {
     }
 
     public int calculator(int a, int b) {
-        int c = a + b;
-        return c;
+        return a + b;
     }
 }
