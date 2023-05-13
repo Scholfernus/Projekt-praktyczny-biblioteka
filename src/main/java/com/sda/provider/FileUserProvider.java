@@ -3,6 +3,7 @@ package com.sda.provider;
 import com.sda.model.Address;
 import com.sda.model.Role;
 import com.sda.model.User;
+import lombok.NoArgsConstructor;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -14,8 +15,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
+
 public class FileUserProvider implements UserProvider {
-    private final String filePath = "src/main/resources/users";
+    private String filePath = "src/main/resources/users";
+
+    public FileUserProvider(String filePath) {
+        this.filePath = filePath;
+    }
 
     @Override
     public Set<User> getAllUser() {
@@ -58,9 +65,9 @@ public class FileUserProvider implements UserProvider {
     }
 
     private List<Role> mapToRole(String[] splitUserData) {
-            return Arrays.stream(splitUserData[9].split("/"))
-                    .map(Role::valueOf)
-                    .collect(Collectors.toList());
+        return Arrays.stream(splitUserData[9].split("/"))
+                .map(Role::valueOf)
+                .collect(Collectors.toList());
     }
 
 }
