@@ -3,11 +3,10 @@ package com.sda.provider;
 import com.sda.model.Address;
 import com.sda.model.Role;
 import com.sda.model.User;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import java.awt.*;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
@@ -16,8 +15,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
-
 public class FileUserProvider implements UserProvider {
+
     private String filePath = "src/main/resources/users";
 
     public FileUserProvider(String filePath) {
@@ -27,18 +26,14 @@ public class FileUserProvider implements UserProvider {
     @Override
     public Set<User> getAllUser() {
         Set<User> users = Set.of();
-        try (BufferedReader bufferedReader =
-                     new BufferedReader(new FileReader(filePath))) {
-            var test = bufferedReader.lines()
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
+            users = bufferedReader.lines()
                     .map(this::mapToUser)
                     .collect(Collectors.toSet());
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-        return null;
+        return users;
     }
 
     private User mapToUser(String userDataLine) {
@@ -50,12 +45,11 @@ public class FileUserProvider implements UserProvider {
                 .email(splitUserData[3])
                 .password(splitUserData[4])
                 .address(mapToAddress(splitUserData))
-                .roles(mapToRole(splitUserData))
+                .roles(mapToRoles(splitUserData))
                 .build();
     }
 
     private Address mapToAddress(String[] splitUserData) {
-
         return Address.builder()
                 .street(splitUserData[5])
                 .buildingNo(splitUserData[6])
@@ -64,10 +58,9 @@ public class FileUserProvider implements UserProvider {
                 .build();
     }
 
-    private List<Role> mapToRole(String[] splitUserData) {
+    private List<Role> mapToRoles(String[] splitUserData) {
         return Arrays.stream(splitUserData[9].split("/"))
                 .map(Role::valueOf)
                 .collect(Collectors.toList());
     }
-
 }

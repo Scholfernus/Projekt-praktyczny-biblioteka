@@ -9,16 +9,16 @@ import com.sda.view.View;
 
 import java.util.Optional;
 
-
 public class LoginControllerImpl implements LoginController {
-    public LoginControllerImpl(UserLoginChecker userLoginChecker) {
-        this.userLoginChecker = userLoginChecker;
-    }
 
-    private UserLoginChecker userLoginChecker;
+    private final UserLoginChecker userLoginChecker;
 
     public LoginControllerImpl() {
         this.userLoginChecker = new UserService();
+    }
+
+    public LoginControllerImpl(UserLoginChecker userLoginChecker) {
+        this.userLoginChecker = userLoginChecker;
     }
 
     @Override
@@ -26,6 +26,8 @@ public class LoginControllerImpl implements LoginController {
         if (userLoginChecker.checkLogin(userLoginData)) {
             return new MainMenuView();
         }
-        return new LoginView(Optional.of("Podano niepoporawny login lub hasło"));
+        return new LoginView(
+                Optional.of("Podano niepoprawny login lub hasło")
+        );
     }
 }
