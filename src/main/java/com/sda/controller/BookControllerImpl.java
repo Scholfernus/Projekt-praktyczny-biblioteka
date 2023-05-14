@@ -6,7 +6,7 @@ import com.sda.provider.FileBookProvider;
 import java.util.List;
 
 public class BookControllerImpl implements BookController {
-
+ // Klasa zawiera metody do zamiany na mapy
     private FileBookProvider fileBookProvider;
 
     public BookControllerImpl() {
