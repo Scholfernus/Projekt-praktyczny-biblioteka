@@ -8,11 +8,14 @@ import java.util.List;
 public class BookControllerImpl implements BookController {
 
     private FileBookProvider fileBookProvider;
-    public BookControllerImpl(){
+
+    public BookControllerImpl() {
         this.fileBookProvider = new FileBookProvider();
     }
+
     @Override
     public List<Book> getAllBooks() {
         return fileBookProvider.getAllBooks();
     }
 }
+//
