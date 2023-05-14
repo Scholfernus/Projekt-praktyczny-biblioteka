@@ -10,6 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Author {
-private String firstName;
-private String lastName;
+    private String firstName;
+    private String lastName;
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
 }

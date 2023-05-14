@@ -1,9 +1,11 @@
 package com.sda.controller;
 
+import com.sda.model.Author;
 import com.sda.model.Book;
 
-import java.util.List;
+import java.util.Map;
 
 public interface BookController {
-    List<Book> getAllBooks();
+    Map<Integer, Book> getAllBooks();
+    Map<Integer, Book> getBooksByAuthor(Author author);
 }

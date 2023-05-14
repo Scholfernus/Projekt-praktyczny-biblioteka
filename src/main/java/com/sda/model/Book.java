@@ -5,15 +5,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+
+import java.time.Year;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Book {
-private String title;
-private String isbn;
-private Author author;
-private LocalDate releasedYear;
+    private String title;
+    private String isbn;
+    private Author author;
+    private Year releasedYear;
+
+    @Override
+    public String toString() {
+
+        return  title + ", " + isbn + ", " + author + ", " + releasedYear;
+    }
 }
