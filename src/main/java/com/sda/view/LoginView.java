@@ -45,5 +45,4 @@ public class LoginView implements View {
         String password = scanner.nextLine();
         return new UserLoginData(login, password);
     }
-
 }

@@ -6,8 +6,6 @@ import com.sda.provider.FileUserProvider;
 import com.sda.provider.UserProvider;
 import com.sda.view.ActiveUserUtil;
 
-import static com.sda.view.ActiveUserUtil.setActiveUser;
-
 public class UserService implements UserLoginChecker {
 
     private final UserProvider userProvider;

@@ -2,11 +2,15 @@ package com.sda.controller;
 
 import com.sda.UserDataFactory;
 import com.sda.api.UserLoginData;
+import com.sda.model.User;
+import com.sda.provider.UserProvider;
 import com.sda.service.UserService;
 import com.sda.view.LoginView;
 import com.sda.view.MainMenuView;
 import com.sda.view.View;
 import org.junit.jupiter.api.Test;
+
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,6 +23,15 @@ class LoginControllerImplTest {
 
     @Test
     void whenUserLoginDataIsCorrectShouldReturnMainMenuView() {
+        UserProvider userProvider = () -> UserDataFactory.getExampleUserData();
+        UserProvider userProvider2 = new UserProvider() {
+            @Override
+            public Set<User> getAllUser() {
+                return UserDataFactory.getExampleUserData();
+            }
+        };
+
+        UserProvider userProvider3 = UserDataFactory::getExampleUserData;
         //given
         LoginController loginController = new LoginControllerImpl(
                 new UserService(UserDataFactory::getExampleUserData)
