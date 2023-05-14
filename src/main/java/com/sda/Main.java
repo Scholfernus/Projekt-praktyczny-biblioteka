@@ -8,6 +8,8 @@ import com.sda.view.View;
 public class Main {
 
     public static void main(String[] args) {
+        UserProvider userProvider = new FileUserProvider();
+        System.out.println(userProvider.getAllUser());
         View view = new LoginView();
         view.display();
     }

@@ -4,6 +4,9 @@ import com.sda.api.UserLoginData;
 import com.sda.model.User;
 import com.sda.provider.FileUserProvider;
 import com.sda.provider.UserProvider;
+import com.sda.view.ActiveUserUtil;
+
+import static com.sda.view.ActiveUserUtil.setActiveUser;
 
 public class UserService implements UserLoginChecker {
 
@@ -22,8 +25,10 @@ public class UserService implements UserLoginChecker {
         return userProvider.getAllUser().stream()
                 .filter(user -> checkIfUserExist(
                         userLoginData, user))
-                .anyMatch(user -> checkIfUserPasswordIsCorrect(
-                        userLoginData, user));
+                .filter(user -> checkIfUserPasswordIsCorrect(
+                        userLoginData, user))
+                .peek(ActiveUserUtil::setActiveUser)
+                .findAny().isPresent();
     }
 
     private boolean checkIfUserPasswordIsCorrect(UserLoginData userLoginData,
