@@ -9,11 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Address {
+public class Author {
+    private String firstName;
+    private String lastName;
 
-    private String street;
-    private String buildingNo;
-    private String apartmentNo;
-    private String postalCode;
-
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
 }
