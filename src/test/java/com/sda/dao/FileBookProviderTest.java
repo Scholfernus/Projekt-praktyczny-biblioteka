@@ -1,5 +1,7 @@
-package com.sda.provider;
+package com.sda.dao;
 
+import com.sda.dao.book.BookProvider;
+import com.sda.dao.book.FileBookProvider;
 import com.sda.model.Author;
 import com.sda.model.Book;
 import org.assertj.core.api.Assertions;

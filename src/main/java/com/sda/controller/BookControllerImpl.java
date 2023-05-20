@@ -2,8 +2,8 @@ package com.sda.controller;
 
 import com.sda.model.Author;
 import com.sda.model.Book;
-import com.sda.provider.BookProvider;
-import com.sda.provider.FileBookProvider;
+import com.sda.dao.book.BookProvider;
+import com.sda.dao.book.FileBookProvider;
 import com.sda.service.DisplayUtil;
 
 import java.util.Map;

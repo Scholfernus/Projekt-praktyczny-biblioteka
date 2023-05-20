@@ -2,8 +2,8 @@ package com.sda.service;
 
 import com.sda.api.UserLoginData;
 import com.sda.model.User;
-import com.sda.provider.FileUserProvider;
-import com.sda.provider.UserProvider;
+import com.sda.dao.user.FileUserDao;
+import com.sda.dao.user.UserProvider;
 import com.sda.view.ActiveUserUtil;
 
 public class UserService implements UserLoginChecker {
@@ -11,7 +11,7 @@ public class UserService implements UserLoginChecker {
     private final UserProvider userProvider;
 
     public UserService() {
-        userProvider = new FileUserProvider();
+        userProvider = new FileUserDao();
     }
 
     public UserService(UserProvider userProvider) {

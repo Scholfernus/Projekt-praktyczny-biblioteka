@@ -1,8 +1,8 @@
 package com.sda.view;
 
 import com.sda.api.UserLoginData;
-import com.sda.controller.LoginController;
-import com.sda.controller.LoginControllerImpl;
+import com.sda.controller.UserController;
+import com.sda.controller.UserControllerImpl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,18 +12,18 @@ import java.util.Scanner;
 public class LoginView implements View {
 
     private Scanner scanner;
-    private LoginController loginController;
+    private UserController userController;
     private Optional<String> message;
 
     public LoginView() {
         this.scanner = new Scanner(System.in);
-        this.loginController = new LoginControllerImpl();
+        this.userController = new UserControllerImpl();
         this.message = Optional.empty();
     }
 
     public LoginView(Optional<String> message) {
         this.scanner = new Scanner(System.in);
-        this.loginController = new LoginControllerImpl();
+        this.userController = new UserControllerImpl();
         this.message = message;
     }
 
@@ -34,7 +34,7 @@ public class LoginView implements View {
 
     @Override
     public void display() {
-        loginController.login(getData()).display();
+        userController.login(getData()).display();
     }
 
     UserLoginData getData() {

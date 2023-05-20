@@ -1,24 +1,23 @@
-package com.sda.provider;
+package com.sda.dao.user;
 
 import com.sda.model.Address;
 import com.sda.model.Role;
 import com.sda.model.User;
 import lombok.NoArgsConstructor;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
-public class FileUserProvider implements UserProvider {
+public class FileUserDao implements UserProvider, UserLoader {
 
     private String filePath = "src/main/resources/users";
 
-    public FileUserProvider(String filePath) {
+    public FileUserDao(String filePath) {
         this.filePath = filePath;
     }
 
@@ -33,6 +32,11 @@ public class FileUserProvider implements UserProvider {
             e.printStackTrace();
         }
         return users;
+    }
+
+    @Override
+    public Optional<User> getByLogin(String login) {
+        return getAllUser().stream().filter(user -> user.getLogin().equals(login)).findAny();
     }
 
     private User mapToUser(String userDataLine) {
@@ -61,5 +65,15 @@ public class FileUserProvider implements UserProvider {
         return Arrays.stream(splitUserData[9].split("/"))
                 .map(Role::valueOf)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void saveUser(User user) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath, true))) {
+            bufferedWriter.newLine();
+            bufferedWriter.write(user.parseToFileFormat());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
