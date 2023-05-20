@@ -16,4 +16,7 @@ public class Address {
     private String apartmentNo;
     private String postalCode;
 
+    public String parseToFileFormat() {
+        return street + ";" + buildingNo + ";" + apartmentNo + ";" + postalCode;
+    }
 }
