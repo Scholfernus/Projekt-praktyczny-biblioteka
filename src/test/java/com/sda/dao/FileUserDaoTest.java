@@ -5,6 +5,7 @@ import com.sda.dao.user.UserProvider;
 import com.sda.model.User;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.util.Set;
 
 import static com.sda.UserDataFactory.getExampleUserData;
